@@ -21,13 +21,14 @@ Production-oriented Dagster user-code image for running a gRPC code location on 
 
 ## Bootstrap model
 
-This image is now a stable Dagster runtime that bootstraps business logic from the active `stock-screener` wheel release.
+This image is a generic Dagster runtime that bootstraps business logic from an external wheel release.
 
-- On startup, it reads `STOCK_SCREENER_CURRENT_URI` (default: `s3://lakehouse/artifacts/stock-screener/current.txt`)
+- On startup, it requires `DAGSTER_PACKAGE_CURRENT_URI`
+- It imports definitions from `DAGSTER_PACKAGE_MODULE` (defaults to `stock_screener.dagster_defs`)
 - It resolves the active wheel from `current.txt`
 - It downloads and installs that wheel into a local target directory
-- It logs the pointer URI, resolved wheel URI, wheel filename, and inferred package version
-- It then serves Dagster definitions from `stock_screener.dagster_defs`
+- It logs the pointer URI, resolved wheel URI, wheel filename, inferred distribution name, and resolved version
+- It then serves Dagster definitions from the configured module
 
 Changing `current.txt` does not hot-reload an already running code server. Promote the new wheel first, then restart the Dagster user-code deployment so the next process startup resolves the new artifact.
 

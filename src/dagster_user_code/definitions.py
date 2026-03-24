@@ -1,5 +1,7 @@
-from dagster_user_code.bootstrap import ensure_stock_screener_installed
+import importlib
 
-ensure_stock_screener_installed()
+from dagster_user_code.bootstrap import configured_module, ensure_package_installed
 
-from stock_screener.dagster_defs import defs
+ensure_package_installed()
+
+defs = importlib.import_module(configured_module()).defs

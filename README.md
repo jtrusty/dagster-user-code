@@ -15,7 +15,7 @@ Production-oriented Dagster user-code image for running a gRPC code location on 
 - This image intentionally does not include `dagster-webserver`
 - The image currently targets Python `3.13` because `dagster-dbt` `0.28.20` currently declares `Requires-Python <3.14`
 - The default dbt adapter is `dbt-spark`; swap it if your actual target is Databricks or something else
-- The runtime only includes the `aws` extra by default; add `dbt` or `spark` extras explicitly if this specific image variant needs them
+- The runtime includes the `aws`, `spark`, and `dbt` extras by default; add or remove capabilities with the `INSTALL_EXTRAS` build arg
 - The Docker build installs from `uv.lock`, so dependency resolution happens before image build time
 - The Docker image installs extras through the `INSTALL_EXTRAS` build arg
 

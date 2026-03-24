@@ -4,11 +4,12 @@ ARG INSTALL_EXTRAS=aws,dbt,spark
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1 \
     DAGSTER_HOME=/opt/dagster/dagster_home \
     DAGSTER_GRPC_PORT=4000 \
     DAGSTER_MODULE_NAME=dagster_user_code.definitions \
-    JAVA_HOME=/usr/lib/jvm/default-java
+    JAVA_HOME=/usr/lib/jvm/default-java \
+    UV_LINK_MODE=copy \
+    UV_PROJECT_ENVIRONMENT=/usr/local
 
 WORKDIR /opt/dagster/app
 
@@ -18,11 +19,20 @@ RUN apt-get update \
         tini \
     && rm -rf /var/lib/apt/lists/*
 
-COPY pyproject.toml constraints.txt README.md ./
+RUN pip install --no-cache-dir uv
+
+COPY pyproject.toml uv.lock README.md ./
 COPY src ./src
 
-RUN pip install --upgrade pip \
-    && pip install -c constraints.txt ".[${INSTALL_EXTRAS}]"
+RUN set -eux; \
+    extra_flags=""; \
+    OLD_IFS="$IFS"; \
+    IFS=','; \
+    for extra in $INSTALL_EXTRAS; do \
+        extra_flags="$extra_flags --extra $extra"; \
+    done; \
+    IFS="$OLD_IFS"; \
+    uv sync --frozen --no-dev $extra_flags
 
 RUN mkdir -p "${DAGSTER_HOME}"
 

@@ -16,15 +16,24 @@ Production-oriented Dagster user-code image for running a gRPC code location on 
 - The image currently targets Python `3.13` because `dagster-dbt` `0.28.20` currently declares `Requires-Python <3.14`
 - The default dbt adapter is `dbt-spark`; swap it if your actual target is Databricks or something else
 - `pyspark` and `delta-spark` should be pinned after confirming the Spark version you run in-cluster
-- The Docker build uses `constraints.txt` to keep `pip` resolution stable for the published image
+- The Docker build installs from `uv.lock`, so dependency resolution happens before image build time
 - The Docker image installs the `aws`, `dbt`, and `spark` extras by default; you can override that with the `INSTALL_EXTRAS` build arg
 
 ## Local development
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
-pip install -e ".[aws,dbt,spark,dev]"
+uv sync --extra aws --extra dbt --extra spark --extra dev
 dagster api grpc -h 0.0.0.0 -p 4000 -m dagster_user_code.definitions
 ```
+
+## Dependency management
+
+This repo uses `uv` for locking and syncing dependencies.
+
+```bash
+uv lock
+uv lock --upgrade
+uv sync --extra aws --extra dbt --extra spark --extra dev
+```
+
+Commit `uv.lock` with dependency changes so CI and Docker builds install from a fixed graph.

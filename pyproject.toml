@@ -21,7 +21,7 @@ dependencies = [
 [project.optional-dependencies]
 aws = [
   "dagster-aws==0.28.20",
-  "boto3>=1.42.74,<2.0",
+  "boto3>=1.42.62,<1.42.71",
   "s3fs>=2026.2.0,<2027.0.0",
 ]
 dbt = [
@@ -40,7 +40,7 @@ dev = [
   "pytest>=9.0.2,<10",
 ]
 lineage = [
-  "openlineage-dagster>=1.38.0,<2.0",
+  "dagster-openlineage>=0.1.0,<1.0",
 ]
 notebooks = [
   "ipykernel>=7.2.0,<8",
@@ -56,3 +56,6 @@ packages = ["src/dagster_user_code"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.uv]
+default-groups = []

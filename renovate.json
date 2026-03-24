@@ -8,6 +8,9 @@
     "dependencies"
   ],
   "dependencyDashboard": true,
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "prHourlyLimit": 2,
   "prConcurrentLimit": 5,
   "rangeStrategy": "bump",
@@ -20,7 +23,8 @@
         "dagster-dbt",
         "dagster-k8s",
         "dagster-postgres",
-        "dagster-pyspark"
+        "dagster-pyspark",
+        "dagster-openlineage"
       ],
       "groupName": "dagster"
     },
@@ -55,7 +59,6 @@
       "matchPackageNames": [
         "boto3",
         "duckdb",
-        "great-expectations",
         "ipykernel",
         "jupyterlab",
         "pandas",
@@ -81,7 +84,7 @@
         "dagster-k8s",
         "dagster-postgres",
         "dagster-pyspark",
-        "openlineage-dagster",
+        "dagster-openlineage",
         "dbt-core",
         "dbt-spark",
         "great-expectations",

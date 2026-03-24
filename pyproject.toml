@@ -7,7 +7,7 @@ name = "dagster-user-code"
 version = "0.2.0"
 description = "Dagster user-code image and Python package for Kubernetes execution"
 readme = "README.md"
-requires-python = ">=3.11,<3.14"
+requires-python = ">=3.14.3,<3.15"
 license = { text = "MIT" }
 authors = [
   { name = "Justin" },

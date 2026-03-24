@@ -33,6 +33,7 @@ spark = [
   "dagster-pyspark==0.28.20",
   "pyspark>=4.1.1,<4.2",
   "delta-spark>=4.1.0,<4.2",
+  "openbb>=4.5.0,<5.0.0",
   "pyarrow>=23.0.1,<24",
   "pandas>=3.0.1,<4.0",
 ]

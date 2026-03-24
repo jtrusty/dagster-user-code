@@ -39,7 +39,7 @@ RUN mkdir -p "${DAGSTER_HOME}"
 EXPOSE 4000
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
-    CMD python -c "import dagster_user_code"
+    CMD python -c "import dagster_user_code.bootstrap"
 
 ENTRYPOINT ["tini", "--"]
 CMD ["sh", "-c", "dagster api grpc -h 0.0.0.0 -p ${DAGSTER_GRPC_PORT} -m ${DAGSTER_MODULE_NAME}"]

@@ -1,10 +1,5 @@
-from dagster import Definitions, asset
+from dagster_user_code.bootstrap import ensure_stock_screener_installed
 
+ensure_stock_screener_installed()
 
-@asset
-def healthcheck_asset() -> str:
-    return "ok"
-
-
-defs = Definitions(assets=[healthcheck_asset])
-
+from stock_screener.dagster_defs import defs

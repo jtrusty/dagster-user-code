@@ -19,6 +19,18 @@ Production-oriented Dagster user-code image for running a gRPC code location on 
 - The Docker build installs from `uv.lock`, so dependency resolution happens before image build time
 - The Docker image installs the `aws`, `dbt`, and `spark` extras by default; you can override that with the `INSTALL_EXTRAS` build arg
 
+## Bootstrap model
+
+This image is now a stable Dagster runtime that bootstraps business logic from the active `stock-screener` wheel release.
+
+- On startup, it reads `STOCK_SCREENER_CURRENT_URI` (default: `s3://lakehouse/artifacts/stock-screener/current.txt`)
+- It resolves the active wheel from `current.txt`
+- It downloads and installs that wheel into a local target directory
+- It logs the pointer URI, resolved wheel URI, wheel filename, and inferred package version
+- It then serves Dagster definitions from `stock_screener.dagster_defs`
+
+Changing `current.txt` does not hot-reload an already running code server. Promote the new wheel first, then restart the Dagster user-code deployment so the next process startup resolves the new artifact.
+
 ## Local development
 
 ```bash

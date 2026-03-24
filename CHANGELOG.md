@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/jtrusty/dagster-user-code/compare/v0.1.1...v0.1.2) (2026-03-24)
+
+
+### Bug Fixes
+
+* bootstrap refresh site-packages handles explicity after install ([0202316](https://github.com/jtrusty/dagster-user-code/commit/0202316561df8ae61e414269d9bb5d7b0650ca1c))
+
 ## [0.1.1](https://github.com/jtrusty/dagster-user-code/compare/v0.1.0...v0.1.1) (2026-03-24)
 
 

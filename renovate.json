@@ -41,6 +41,38 @@
       "groupName": "spark-runtime"
     },
     {
+      "description": "Bundle GitHub Actions updates into one PR.",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "groupName": "github-actions"
+    },
+    {
+      "description": "Bundle supporting Python runtime updates into one PR.",
+      "matchManagers": [
+        "pep621"
+      ],
+      "matchPackageNames": [
+        "boto3",
+        "duckdb",
+        "great-expectations",
+        "ipykernel",
+        "jupyterlab",
+        "pandas",
+        "polars",
+        "pyarrow",
+        "pytest",
+        "s3fs"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "python-supporting-deps"
+    },
+    {
       "description": "Stagger major updates for stateful data tooling.",
       "matchPackageNames": [
         "dagster",

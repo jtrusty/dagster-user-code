@@ -13,7 +13,7 @@ Production-oriented Dagster user-code image for running a gRPC code location on 
 ## Runtime notes
 
 - This image intentionally does not include `dagster-webserver`
-- The image currently targets Python `3.14`, which is the highest Python line we are attempting for this runtime
+- The image currently targets Python `3.13` because `dagster-dbt` `0.28.20` currently declares `Requires-Python <3.14`
 - The default dbt adapter is `dbt-spark`; swap it if your actual target is Databricks or something else
 - `pyspark` and `delta-spark` should be pinned after confirming the Spark version you run in-cluster
 - The Docker build uses `constraints.txt` to keep `pip` resolution stable for the published image

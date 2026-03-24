@@ -24,24 +24,3 @@ pip install --upgrade pip
 pip install -e ".[dev]"
 dagster api grpc -h 0.0.0.0 -p 4000 -m dagster_user_code.definitions
 ```
-
-## Image publishing
-
-The GitHub Actions workflow publishes to:
-
-```text
-ghcr.io/<owner>/<repo>
-```
-
-Package write permissions are handled with the repository `GITHUB_TOKEN`.
-
-## Dependency updates
-
-Renovate is configured in `renovate.json` to:
-
-- group Dagster package updates together
-- group dbt updates together
-- group Spark runtime updates together
-- require approval from the dependency dashboard before major upgrades for core data runtime packages
-
-Install the Renovate GitHub App for this repository to activate it.

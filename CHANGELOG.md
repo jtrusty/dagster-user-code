@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/jtrusty/dagster-user-code/compare/v0.1.2...v0.2.0) (2026-03-24)
+
+
+### Features
+
+* added aws, spark, dbt ([059d0b9](https://github.com/jtrusty/dagster-user-code/commit/059d0b9d4d407267ac3e9c5a52f8c52caf3b8ffc))
+
 ## [0.1.2](https://github.com/jtrusty/dagster-user-code/compare/v0.1.1...v0.1.2) (2026-03-24)
 
 

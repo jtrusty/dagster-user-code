@@ -38,7 +38,7 @@ lineage = [
   "dagster-openlineage>=1.12,<1.13",
 ]
 notebooks = [
-  "ipykernel>=6,<7",
+  "ipykernel>=6.31.0,<7",
   "jupyterlab>=4,<5",
 ]
 local = [

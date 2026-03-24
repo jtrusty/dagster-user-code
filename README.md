@@ -8,7 +8,7 @@ Production-oriented Dagster user-code image for running a gRPC code location on 
 - Dagster integration packages aligned on the matching `0.28.20` release line
 - A minimal placeholder code location in `src/dagster_user_code`
 - A Dockerfile for the Dagster gRPC server image
-- GitHub Actions workflow to publish to GHCR on `main`, `master`, tags, and manual dispatch
+- GitHub Actions workflows for GHCR publishing and automated semantic versioning
 
 ## Runtime notes
 
@@ -37,3 +37,16 @@ uv sync --extra aws --extra dbt --extra spark --extra dev
 ```
 
 Commit `uv.lock` with dependency changes so CI and Docker builds install from a fixed graph.
+
+## Releases
+
+This repo uses `release-please` to manage semantic version tags and changelog updates.
+
+- `fix:` commits produce a patch release
+- `feat:` commits produce a minor release
+- `feat!:` or `BREAKING CHANGE:` produces a major release
+- a release PR is opened automatically from commits on the default branch
+- merging that PR creates a GitHub release and a `vX.Y.Z` tag
+- the publish workflow then pushes both `latest` and the matching `vX.Y.Z` image tag to GHCR
+
+The package version in `pyproject.toml`, the git tag, and the changelog are all updated by `release-please`.

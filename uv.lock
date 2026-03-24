@@ -798,7 +798,7 @@ requires-dist = [
     { name = "dagster-openlineage", marker = "extra == 'lineage'", specifier = ">=0.1.0,<1.0" },
     { name = "dagster-postgres", specifier = "==0.28.20" },
     { name = "dagster-pyspark", marker = "extra == 'spark'", specifier = "==0.28.20" },
-    { name = "dbt-core", marker = "extra == 'dbt'", specifier = ">=1.10.20,<1.11" },
+    { name = "dbt-core", marker = "extra == 'dbt'", specifier = ">=1.11.7,<1.12" },
     { name = "dbt-spark", marker = "extra == 'dbt'", specifier = ">=1.10.1,<1.11" },
     { name = "delta-spark", marker = "extra == 'spark'", specifier = ">=4.1.0,<4.2" },
     { name = "duckdb", marker = "extra == 'local'", specifier = ">=1.5.1,<2.0" },
@@ -857,7 +857,7 @@ wheels = [
 
 [[package]]
 name = "dbt-core"
-version = "1.10.20"
+version = "1.11.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "agate" },
@@ -883,9 +883,9 @@ dependencies = [
     { name = "sqlparse" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/aa/d7/c2668baa1b75859f47df85b7800b175a2a852dc7073dfa717cd50b1726fa/dbt_core-1.10.20.tar.gz", hash = "sha256:023bf4fe5012460498686a0c03cf183747b39937a64cadfa5d6a1650a436b16f", size = 900816, upload-time = "2026-03-03T20:26:06.25Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/34/50/1053e2ebf77e01cfbf79fada97d0aaf8ee85e580363612b43a23c84bb20a/dbt_core-1.11.7.tar.gz", hash = "sha256:3bacae28f4c687280d91671a1694f52a1654e472bebc8313b37870ac3d61e42b", size = 919885, upload-time = "2026-03-04T16:16:26.518Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/eb/6b/80eed8dc0c88d4798e8c1def8c1d62c8ad273f7c1f06a7a90def1f42fda3/dbt_core-1.10.20-py3-none-any.whl", hash = "sha256:1ddb350cbb7cbffe3db6ecaf409f90341941eabf2fae2e70d141e979ef0e6ffe", size = 987258, upload-time = "2026-03-03T20:26:03.213Z" },
+    { url = "https://files.pythonhosted.org/packages/57/88/28a88f807e38bee4b6308f4a39a02fd818040a36aac883b3041b18c1be9b/dbt_core-1.11.7-py3-none-any.whl", hash = "sha256:047b4ac6bd4541dd33a6642dedd7fcd8b998e3f5ec6e7083436b369558a995d6", size = 1009631, upload-time = "2026-03-04T16:16:24.818Z" },
 ]
 
 [[package]]

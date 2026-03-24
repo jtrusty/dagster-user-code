@@ -795,9 +795,10 @@ wheels = [
 
 [[package]]
 name = "dagster-user-code"
-version = "0.1.0"
+version = "0.1.2"
 source = { editable = "." }
 dependencies = [
+    { name = "boto3" },
     { name = "dagster" },
     { name = "dagster-k8s" },
     { name = "dagster-postgres" },
@@ -805,7 +806,6 @@ dependencies = [
 
 [package.optional-dependencies]
 aws = [
-    { name = "boto3" },
     { name = "dagster-aws" },
     { name = "s3fs" },
 ]
@@ -839,7 +839,7 @@ spark = [
 
 [package.metadata]
 requires-dist = [
-    { name = "boto3", marker = "extra == 'aws'", specifier = ">=1.42.62,<1.42.71" },
+    { name = "boto3", specifier = ">=1.42.62,<1.42.71" },
     { name = "dagster", specifier = "==1.12.20" },
     { name = "dagster-aws", marker = "extra == 'aws'", specifier = "==0.28.20" },
     { name = "dagster-dbt", marker = "extra == 'dbt'", specifier = "==0.28.20" },
@@ -853,7 +853,7 @@ requires-dist = [
     { name = "duckdb", marker = "extra == 'local'", specifier = ">=1.5.1,<2.0" },
     { name = "ipykernel", marker = "extra == 'notebooks'", specifier = ">=7.2.0,<8" },
     { name = "jupyterlab", marker = "extra == 'notebooks'", specifier = ">=4.5.6,<5" },
-    { name = "openbb", marker = "extra == 'spark'", specifier = ">=4.5.0,<5.0.0" },
+    { name = "openbb", marker = "extra == 'spark'", specifier = ">=4.7.1,<5.0.0" },
     { name = "pandas", marker = "extra == 'spark'", specifier = ">=3.0.1,<4.0" },
     { name = "polars", marker = "extra == 'local'", specifier = ">=1.39.3,<2.0" },
     { name = "pyarrow", marker = "extra == 'spark'", specifier = ">=23.0.1,<24" },

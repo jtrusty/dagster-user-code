@@ -20,8 +20,7 @@
         "dagster-dbt",
         "dagster-k8s",
         "dagster-postgres",
-        "dagster-pyspark",
-        "dagster-openlineage"
+        "dagster-pyspark"
       ],
       "groupName": "dagster"
     },
@@ -50,7 +49,7 @@
         "dagster-k8s",
         "dagster-postgres",
         "dagster-pyspark",
-        "dagster-openlineage",
+        "openlineage-dagster",
         "dbt-core",
         "dbt-spark",
         "great-expectations",

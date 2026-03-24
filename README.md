@@ -5,6 +5,7 @@ Production-oriented Dagster user-code image for running a gRPC code location on 
 ## What is included
 
 - Dagster `1.12.14` runtime packages aligned with the control plane
+- Dagster integration packages aligned on the matching `0.28.14` release line
 - A minimal placeholder code location in `src/dagster_user_code`
 - A Dockerfile for the Dagster gRPC server image
 - GitHub Actions workflow to publish to GHCR on `main`, `master`, tags, and manual dispatch

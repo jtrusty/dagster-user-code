@@ -1,0 +1,66 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "timezone": "America/Chicago",
+  "labels": [
+    "dependencies"
+  ],
+  "dependencyDashboard": true,
+  "prHourlyLimit": 2,
+  "prConcurrentLimit": 5,
+  "rangeStrategy": "bump",
+  "packageRules": [
+    {
+      "description": "Keep Dagster packages aligned on the same version.",
+      "matchPackageNames": [
+        "dagster",
+        "dagster-aws",
+        "dagster-dbt",
+        "dagster-k8s",
+        "dagster-postgres",
+        "dagster-pyspark",
+        "dagster-openlineage"
+      ],
+      "groupName": "dagster"
+    },
+    {
+      "description": "Keep dbt core and adapter updates together.",
+      "matchPackageNames": [
+        "dbt-core",
+        "dbt-spark"
+      ],
+      "groupName": "dbt"
+    },
+    {
+      "description": "Keep Spark runtime packages grouped for coordinated testing.",
+      "matchPackageNames": [
+        "pyspark",
+        "delta-spark"
+      ],
+      "groupName": "spark-runtime"
+    },
+    {
+      "description": "Stagger major updates for stateful data tooling.",
+      "matchPackageNames": [
+        "dagster",
+        "dagster-aws",
+        "dagster-dbt",
+        "dagster-k8s",
+        "dagster-postgres",
+        "dagster-pyspark",
+        "dagster-openlineage",
+        "dbt-core",
+        "dbt-spark",
+        "great-expectations",
+        "pyspark",
+        "delta-spark"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "dependencyDashboardApproval": true
+    }
+  ]
+}

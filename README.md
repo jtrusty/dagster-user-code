@@ -15,9 +15,9 @@ Production-oriented Dagster user-code image for running a gRPC code location on 
 - This image intentionally does not include `dagster-webserver`
 - The image currently targets Python `3.13` because `dagster-dbt` `0.28.20` currently declares `Requires-Python <3.14`
 - The default dbt adapter is `dbt-spark`; swap it if your actual target is Databricks or something else
-- `pyspark` and `delta-spark` should be pinned after confirming the Spark version you run in-cluster
+- The runtime only includes the `aws` extra by default; add `dbt` or `spark` extras explicitly if this specific image variant needs them
 - The Docker build installs from `uv.lock`, so dependency resolution happens before image build time
-- The Docker image installs the `aws`, `dbt`, and `spark` extras by default; you can override that with the `INSTALL_EXTRAS` build arg
+- The Docker image installs extras through the `INSTALL_EXTRAS` build arg
 
 ## Bootstrap model
 
@@ -29,6 +29,8 @@ This image is a generic Dagster runtime that bootstraps business logic from an e
 - It downloads and installs that wheel into a local target directory
 - It logs the pointer URI, resolved wheel URI, wheel filename, inferred distribution name, and resolved version
 - It then serves Dagster definitions from the configured module
+
+Important: the bootstrap currently installs the external wheel with `pip install --no-deps`. That means this image must already contain any runtime libraries required by the loaded package, or you need a future enhancement that installs a dependency bundle alongside the wheel.
 
 Changing `current.txt` does not hot-reload an already running code server. Promote the new wheel first, then restart the Dagster user-code deployment so the next process startup resolves the new artifact.
 

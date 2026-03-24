@@ -16,12 +16,12 @@ dependencies = [
   "dagster==1.12.20",
   "dagster-k8s==0.28.20",
   "dagster-postgres==0.28.20",
+  "boto3>=1.42.62,<1.42.71",
 ]
 
 [project.optional-dependencies]
 aws = [
   "dagster-aws==0.28.20",
-  "boto3>=1.42.62,<1.42.71",
   "s3fs>=2026.2.0,<2027.0.0",
 ]
 dbt = [
@@ -33,9 +33,7 @@ spark = [
   "dagster-pyspark==0.28.20",
   "pyspark>=4.1.1,<4.2",
   "delta-spark>=4.1.0,<4.2",
-  "openbb>=4.5.0,<5.0.0",
   "pyarrow>=23.0.1,<24",
-  "pandas>=3.0.1,<4.0",
 ]
 dev = [
   "pytest>=9.0.2,<10",

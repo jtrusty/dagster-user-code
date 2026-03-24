@@ -1,6 +1,6 @@
 FROM python:3.13-slim
 
-ARG INSTALL_EXTRAS=aws,dbt,spark,validation
+ARG INSTALL_EXTRAS=aws,dbt,spark
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \

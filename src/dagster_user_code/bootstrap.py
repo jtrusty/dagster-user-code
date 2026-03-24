@@ -4,8 +4,10 @@ import json
 import logging
 import os
 import re
+import site
 import subprocess
 import sys
+import importlib
 from importlib.metadata import PackageNotFoundError, version as package_version
 from pathlib import Path
 from urllib.parse import urlparse
@@ -119,6 +121,7 @@ def log_bootstrap_metadata(pointer_uri: str, wheel_uri: str, wheel_path: Path, m
 
 def ensure_package_installed() -> Path:
     target_dir = install_dir()
+    site.addsitedir(str(target_dir))
     if str(target_dir) not in sys.path:
         sys.path.insert(0, str(target_dir))
 
@@ -128,11 +131,16 @@ def ensure_package_installed() -> Path:
     marker = marker_path(target_dir)
     if marker.exists() and marker.read_text(encoding="utf-8").strip() == wheel_uri:
         wheel_path = target_dir / ".artifacts" / Path(urlparse(wheel_uri).path).name
+        importlib.invalidate_caches()
         log_bootstrap_metadata(pointer_uri, wheel_uri, wheel_path, module_name)
         return target_dir
 
     wheel_path = download_wheel(wheel_uri, target_dir / ".artifacts")
     install_wheel(wheel_path, target_dir)
     marker.write_text(f"{wheel_uri}\n", encoding="utf-8")
+    site.addsitedir(str(target_dir))
+    if str(target_dir) not in sys.path:
+        sys.path.insert(0, str(target_dir))
+    importlib.invalidate_caches()
     log_bootstrap_metadata(pointer_uri, wheel_uri, wheel_path, module_name)
     return target_dir

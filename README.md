@@ -15,6 +15,8 @@ Production-oriented Dagster user-code image for running a gRPC code location on 
 - This image intentionally does not include `dagster-webserver`
 - The default dbt adapter is `dbt-spark`; swap it if your actual target is Databricks or something else
 - `pyspark` and `delta-spark` should be pinned after confirming the Spark version you run in-cluster
+- The Docker build uses `constraints.txt` to keep `pip` resolution stable for the published image
+- The Docker image installs the `aws`, `dbt`, `spark`, and `validation` extras by default; you can override that with the `INSTALL_EXTRAS` build arg
 
 ## Local development
 
@@ -22,6 +24,6 @@ Production-oriented Dagster user-code image for running a gRPC code location on 
 python -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
-pip install -e ".[dev]"
+pip install -e ".[aws,dbt,spark,validation,dev]"
 dagster api grpc -h 0.0.0.0 -p 4000 -m dagster_user_code.definitions
 ```

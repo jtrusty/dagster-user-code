@@ -1,0 +1,61 @@
+version: '3'
+
+vars:
+  IMAGE:
+    sh: echo "${IMAGE:-dagster-user-code:local}"
+  ENV_FILE:
+    sh: echo "${ENV_FILE:-.env.deploy}"
+  PORT:
+    sh: echo "${PORT:-4000}"
+  DEBUG_CONTAINER:
+    sh: echo "${DEBUG_CONTAINER:-dagster-user-code-debug}"
+
+silent: true
+
+tasks:
+  local:build:
+    desc: Build the local Dagster user-code image.
+    cmds:
+      - docker build -t {{.IMAGE}} .
+
+  local:deploy:
+    desc: Run the local Dagster user-code gRPC server with deploy env vars.
+    preconditions:
+      - sh: test -f {{.ENV_FILE}}
+        msg: Missing env file {{.ENV_FILE}}. Set ENV_FILE or create .env.deploy.
+    cmds:
+      - docker run --rm --env-file {{.ENV_FILE}} -p {{.PORT}}:4000 {{.IMAGE}}
+
+  local:run:
+    desc: "Execute a Dagster job directly inside the container and stream logs. Usage: task local:run JOB=landing_sec_daily_job"
+    preconditions:
+      - sh: test -f {{.ENV_FILE}}
+        msg: "Missing env file {{.ENV_FILE}}. Set ENV_FILE or create .env.deploy."
+      - sh: test -n "{{.JOB}}"
+        msg: "JOB is required. Example: task local:run JOB=landing_sec_daily_job"
+    cmds:
+      - docker run --rm --env-file {{.ENV_FILE}} {{.IMAGE}} /usr/local/bin/dg launch --job {{.JOB}} -m dagster_user_code.definitions
+
+  local:run:debug:
+    desc: "Run a Dagster job in a named container, keep it, and dump logs on failure. Usage: task local:run:debug JOB=landing_sec_filing_bulk_job"
+    preconditions:
+      - sh: test -f {{.ENV_FILE}}
+        msg: "Missing env file {{.ENV_FILE}}. Set ENV_FILE or create .env.deploy."
+      - sh: test -n "{{.JOB}}"
+        msg: "JOB is required. Example: task local:run:debug JOB=landing_sec_filing_bulk_job"
+    cmds:
+      - |
+        docker rm -f {{.DEBUG_CONTAINER}} >/dev/null 2>&1 || true
+        exit_code=0
+        docker run --name {{.DEBUG_CONTAINER}} --env-file {{.ENV_FILE}} {{.IMAGE}} /usr/local/bin/dg launch --job {{.JOB}} -m dagster_user_code.definitions || exit_code=$?
+        if [ "$exit_code" -ne 0 ]; then
+          echo ""
+          echo "Run failed with exit code $exit_code. Showing tail of container logs from {{.DEBUG_CONTAINER}}:"
+          docker logs --tail 300 {{.DEBUG_CONTAINER}} || true
+          exit "$exit_code"
+        fi
+
+  local:logs:
+    desc: "Show logs from the debug run container. Usage: task local:logs"
+    cmds:
+      - docker logs --tail 300 {{.DEBUG_CONTAINER}}

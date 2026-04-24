@@ -806,7 +806,7 @@ wheels = [
 
 [[package]]
 name = "dagster-user-code"
-version = "0.2.3"
+version = "0.3.0"
 source = { editable = "." }
 dependencies = [
     { name = "boto3", marker = "sys_platform == 'linux'" },

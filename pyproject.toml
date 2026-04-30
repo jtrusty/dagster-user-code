@@ -18,7 +18,7 @@ dependencies = [
   "dagster-k8s==0.29.2",
   "dagster-postgres==0.29.2",
   "boto3>=1.42.62,<1.43",
-  "packaging>=26.1,<27",
+  "packaging>=26.2,<27",
 ]
 
 [project.optional-dependencies]

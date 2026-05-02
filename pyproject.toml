@@ -13,17 +13,17 @@ authors = [
   { name = "Justin Trusty" },
 ]
 dependencies = [
-  "dagster==1.13.2",
-  "dagster-dg-cli==1.13.2",
-  "dagster-k8s==0.29.2",
-  "dagster-postgres==0.29.2",
+  "dagster==1.13.3",
+  "dagster-dg-cli==1.13.3",
+  "dagster-k8s==0.29.3",
+  "dagster-postgres==0.29.3",
   "boto3>=1.42.62,<1.43",
   "packaging>=26.1,<27",
 ]
 
 [project.optional-dependencies]
 aws = [
-  "dagster-aws==0.29.2",
+  "dagster-aws==0.29.3",
   "s3fs>=2026.2.0,<2027.0.0",
 ]
 dbt = [
@@ -31,7 +31,7 @@ dbt = [
   "dbt-spark>=1.10.1,<1.11",
 ]
 spark = [
-  "dagster-pyspark==0.29.2",
+  "dagster-pyspark==0.29.3",
   "pyspark>=4.1.1,<4.2",
   "grpcio-status>=1.80.0,<2",
   "zstandard>=0.25.0,<1",
